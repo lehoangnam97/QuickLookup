@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Form.MainFormController">
+   <children>
+      <TabPane fx:id="tabPanel" maxWidth="-Infinity" minHeight="200.0" minWidth="200.0" prefHeight="400.0" prefWidth="600.0" rotateGraphic="true" side="LEFT" tabClosingPolicy="UNAVAILABLE" tabMinHeight="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      
+   </children>
+</AnchorPane>
