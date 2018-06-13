@@ -30,6 +30,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 /**
  * FXML Controller class
  *
@@ -40,12 +45,12 @@ public class WordTranslateController implements Initializable {
     @FXML
     private ComboBox cbLanguage;
     @FXML
-    private TextArea taResult;
+    private TextFlow tofResult;
     @FXML
     private TextField tfSource;
     @FXML
     private ListView lvHint;
-
+    
     /**
      * Initializes the controller class.
      */
@@ -55,8 +60,7 @@ public class WordTranslateController implements Initializable {
         Load();
         cbLanguage.getItems().addAll(
                 "EV",
-                "VE",
-                "EE"
+                "VE"
         );
         cbLanguage.setValue("EV");
 
@@ -77,26 +81,72 @@ public class WordTranslateController implements Initializable {
  
         voice.speak(tfSource.getText());
     }
+    
+    public void coloredResult(String result)
+    {
+     tofResult.getChildren().clear();
+     
+     String[] paragraph = result.split("\n");
+     
+     for(String row : paragraph)
+     {
+         if(row.length() > 2)
+         {
+            String type = row.substring(0,2);
+            Text rs ;
+            
+            rs = new Text(row.replace("@","").replace("$","") + "\n");
+            rs.setFont(new Font(20));
+            if(type.equalsIgnoreCase("* "))
+            {
+                rs = new Text(row.replace(type,"").replace("$","") + "\n");
+                rs.setFont(new Font(15));
+                rs.setFill(Color.AQUA);
+            }
+            if(type.equalsIgnoreCase("- "))
+            {
+                rs = new Text(row.replace(type," ").replace("$","") + "\n");
+                rs.setFont(new Font(15));
+                rs.setFill(Color.DARKKHAKI);
+            }
+            
+            if(type.equalsIgnoreCase("!$"))
+            {
+               rs = new Text(row.replace(type,"").replace("$","") + "\n");
+               rs.setFont(new Font(15));
+            }
+            
+            if(type.equalsIgnoreCase("=$"))
+            {
+               rs = new Text(row.replace(type,"").replace("$","") + "\n");
+               rs.setFont(new Font(15));
+            }
+            tofResult.getChildren().add(rs);   
+         }
+     }
+     
+    }
 
     public void btnSearchMouseClicked() {
         // TODO add your handling code here:
         String itemText = (String) cbLanguage.getValue().toString();
 
         if (itemText == "EV") {
-            taResult.setText(WordList.getInstance().getEV().Find(tfSource.getText().toLowerCase()));
+           coloredResult(WordList.getInstance().getEV().Find(tfSource.getText().toLowerCase()));
+                 
         }
         if (itemText == "VE") {
-            taResult.setText(WordList.getInstance().getVE().Find(tfSource.getText().toLowerCase()));
+            //taResult.setText(WordList.getInstance().getVE().Find(tfSource.getText().toLowerCase()));
         }
 
-        if (itemText == "EE") {
-            taResult.setText(WordList.getInstance().getEE().Find(tfSource.getText().toLowerCase()));
-        }
+//        if (itemText == "EE") {
+//            toResult.setText(WordList.getInstance().getEE().Find(tfSource.getText().toLowerCase()));
+//        }
     }
 
     public void lvHintMouseClicked() {
         // TODO add your handling code here:
-        tfSource.setText(lvHint.getSelectionModel().toString());
+        tfSource.setText(lvHint.getSelectionModel().getSelectedItem().toString());
 
     }
 
