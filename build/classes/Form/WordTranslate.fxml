@@ -6,24 +6,31 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.TextFlow?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Form.WordTranslateController">
+<AnchorPane id="AnchorPane" prefHeight="440.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Form.WordTranslateController">
    <children>
-      <Button fx:id="btnSource" layoutX="215.0" layoutY="30.0" mnemonicParsing="false" onAction="#btnSearchMouseClicked" prefHeight="25.0" prefWidth="92.0" style="-fx-background-color: #81D4FA; -fx-text-fill: white; -fx-font-size: 15; -fx-font-weight: bold; -fx-border-radius: 10;" text="Tra Cứu" />
-      <ComboBox fx:id="cbLanguage" layoutX="215.0" layoutY="66.0" prefHeight="13.0" prefWidth="92.0" promptText="EV" style="-fx-background-color: #81D4FA;" />
-      <TextField fx:id="tfSource" layoutX="27.0" layoutY="30.0" onInputMethodTextChanged="#UpdateHint" prefHeight="60.0" prefWidth="183.0" style="-fx-background-color: white; -fx-border-radius: 5; -fx-font-size: 25; -fx-border-color: black; -fx-border-width: 0.5;" />
-      <ListView fx:id="lvHint" editable="true" layoutX="27.0" layoutY="100.0" onMouseClicked="#lvHintMouseClicked" prefHeight="238.0" prefWidth="242.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0.5; -fx-border-radius: 5;" />
-      <Button contentDisplay="TEXT_ONLY" ellipsisString="" layoutX="280.0" layoutY="110.0" mnemonicParsing="false" onAction="#SpeechText" prefHeight="25.0" prefWidth="27.0" style="-fx-background-color: green;">
+      <Button fx:id="btnSearch" layoutX="222.0" layoutY="64.0" mnemonicParsing="false" onMousePressed="#btnSearchMouseClicked" onMouseReleased="#btnSearchMouseReleased" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #81D4FA; -fx-text-fill: white; -fx-font-size: 15; -fx-font-weight: bold; -fx-border-radius: 10;" text="Tra Cứu" />
+      <ListView fx:id="lvHint" editable="true" layoutX="27.0" layoutY="107.0" onMouseClicked="#lvHintMouseClicked" prefHeight="311.0" prefWidth="315.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 0.5;" />
+      <Button fx:id="btnVoice" contentDisplay="TEXT_ONLY" ellipsisString="" layoutX="314.0" layoutY="33.0" mnemonicParsing="false" onMousePressed="#SpeechText" onMouseReleased="#SpeechReleased" prefHeight="25.0" prefWidth="29.0" style="-fx-background-color: white; -fx-border-color: black;">
          <rotationAxis>
             <Point3D z="-1.0" />
          </rotationAxis>
       </Button>
-      <ScrollPane layoutX="315.0" layoutY="30.0" prefHeight="310.0" prefWidth="345.0" style="-fx-background: white; -fx-border-color: black; -fx-border-width: 2;" AnchorPane.topAnchor="30.0">
+      <ScrollPane layoutX="352.0" layoutY="30.0" prefHeight="388.0" prefWidth="345.0" style="-fx-background: white; -fx-border-color: black; -fx-border-width: 2;" AnchorPane.topAnchor="30.0">
          <content>
             <TextFlow fx:id="tofResult" style="-fx-background-color: white;" />
          </content>
       </ScrollPane>
+      <TextField fx:id="tfSource" layoutX="27.0" layoutY="30.0" onInputMethodTextChanged="#UpdateHint" prefHeight="67.0" prefWidth="183.0" style="-fx-background-color: white; -fx-border-radius: 5; -fx-font-size: 25; -fx-border-color: black; -fx-border-width: 0.5;" />
+      <ComboBox fx:id="cbLanguage" layoutX="222.0" layoutY="33.0" prefHeight="25.0" prefWidth="79.0" promptText="EV" style="-fx-background-color: #81D4FA;" />
+      <ImageView fitHeight="19.0" fitWidth="19.0" layoutX="319.0" layoutY="37.0" onMousePressed="#SpeechText" onMouseReleased="#SpeechReleased">
+         <image>
+            <Image url="@../../../high-volume.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

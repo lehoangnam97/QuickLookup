@@ -26,10 +26,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -50,7 +53,8 @@ public class WordTranslateController implements Initializable {
     private TextField tfSource;
     @FXML
     private ListView lvHint;
-    
+    @FXML
+    private Button btnVoice , btnSearch; 
     /**
      * Initializes the controller class.
      */
@@ -64,6 +68,7 @@ public class WordTranslateController implements Initializable {
         );
         cbLanguage.setValue("EV");
 
+       
         tfSource.textProperty().addListener((obs, oldText, newText) -> {
             UpdateHint();
 
@@ -71,7 +76,14 @@ public class WordTranslateController implements Initializable {
         });
     }
 
+    public void SpeechReleased()
+    {
+        btnVoice.setStyle("-fx-background-color: white; -fx-border-color: black;");
+    }
+    
     public void SpeechText() {
+        
+        btnVoice.setStyle("-fx-background-color: white; -fx-border-color: #9E9E9E;");
         System.setProperty("http.agent", "Chrome");
 
          VoiceManager vm = VoiceManager.getInstance();
@@ -130,20 +142,31 @@ public class WordTranslateController implements Initializable {
     public void btnSearchMouseClicked() {
         // TODO add your handling code here:
         String itemText = (String) cbLanguage.getValue().toString();
-
+        btnSearch.setStyle("-fx-background-color: #B3E5FC; -fx-text-fill: white; -fx-font-size: 15; -fx-font-weight: bold; -fx-border-radius: 10;");
+        
+        ConnectionDB db = new ConnectionDB();
+        db.createConnection();
+        db.insert(tfSource.getText().toLowerCase());
+        
         if (itemText == "EV") {
            coloredResult(WordList.getInstance().getEV().Find(tfSource.getText().toLowerCase()));
                  
         }
         if (itemText == "VE") {
-            //taResult.setText(WordList.getInstance().getVE().Find(tfSource.getText().toLowerCase()));
+            coloredResult(WordList.getInstance().getVE().Find(tfSource.getText().toLowerCase()));   
         }
-
+        
+        
 //        if (itemText == "EE") {
 //            toResult.setText(WordList.getInstance().getEE().Find(tfSource.getText().toLowerCase()));
 //        }
     }
 
+    public void btnSearchMouseReleased()
+    {
+       btnSearch.setStyle("-fx-background-color: #81D4FA; -fx-text-fill: white; -fx-font-size: 15; -fx-font-weight: bold; -fx-border-radius: 10;");
+    }
+            
     public void lvHintMouseClicked() {
         // TODO add your handling code here:
         tfSource.setText(lvHint.getSelectionModel().getSelectedItem().toString());

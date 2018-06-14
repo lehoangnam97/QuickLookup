@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Dictionary.jar" size="91395805" download="eager" />
+    <jar href="Dictionary.jar" size="91461236" download="eager" />
     <jar href="lib\cmu_time_awb.jar" size="1723774" download="eager" />
     <jar href="lib\cmu_us_kal.jar" size="4899359" download="eager" />
     <jar href="lib\cmudict04.jar" size="894905" download="eager" />
@@ -36,6 +36,7 @@
     <jar href="lib\logback-core-1.2.3.jar" size="471901" download="eager" />
     <jar href="lib\mbrola.jar" size="11926" download="eager" />
     <jar href="lib\slf4j-api-1.7.25.jar" size="41203" download="eager" />
+    <jar href="lib\sqlite-jdbc-3.23.1.jar" size="6733696" download="eager" />
     <jar href="lib\tess4j-3.4.4.jar" size="40535045" download="eager" />
     <jar href="lib\xmlgraphics-commons-1.5.jar" size="601866" download="eager" />
   </resources>

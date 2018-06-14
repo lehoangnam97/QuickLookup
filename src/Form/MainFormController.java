@@ -5,20 +5,27 @@
  */
 package Form;
 
+import ClassModel.WordList;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -60,7 +67,33 @@ public class MainFormController implements Initializable {
         sentenceTranslate.setGraphic(stp);
         tabPanel.getTabs().add(sentenceTranslate);
         
-             
+        
+        Tab history = new Tab();
+        try {
+            history.setContent((Parent) new FXMLLoader(getClass().getResource("HistorySearch.fxml")).load());
+        } catch (IOException ex) {
+            Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        history.setOnSelectionChanged(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                System.out.println("Choose Tab");
+                WordList.getInstance().UpdateHistoryWord();
+                Node selectedContent = history.getContent();
+                ListView listHistory = (ListView) selectedContent.lookup("#lvHint");
+                listHistory.setItems(WordList.getInstance().getHistoryWord());
+            }
+        });
+
+        Text txtHistory = new Text("Từ cũ");
+        txtHistory.setFont(new Font(15));
+        txtHistory.setRotate(90);
+        StackPane stpHistory = new StackPane(new Group(txtHistory));
+        stpHistory.setMinSize(50, 100);
+        history.setGraphic(stpHistory);
+        tabPanel.getTabs().add(history);
+        
         tabPanel.setTabMinHeight(100);
         tabPanel.setTabMaxHeight(100);
     }

@@ -5,7 +5,9 @@
  */
 package ClassModel;
 
+import Form.ConnectionDB;
 import java.util.ArrayList;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -16,7 +18,21 @@ public class WordList {
     
     private ArrayList<String> WordEV , WordVE;
     private DictionaryModel EV,VE,EE;
-
+    
+    private ObservableList<String> historyWord;
+    
+    public ObservableList<String> getHistoryWord()
+    {
+        return historyWord;
+    }
+    
+    public void UpdateHistoryWord()
+    {
+        ConnectionDB db = new ConnectionDB();
+        db.createConnection();
+        historyWord = db.select();
+       
+    }
     
     public static synchronized WordList getInstance(){
         if(null == mInstance){
@@ -72,6 +88,11 @@ public class WordList {
         EV = new DictionaryModel();
         EE = new DictionaryModel();
         VE = new DictionaryModel();
+        
+        ConnectionDB db = new ConnectionDB();
+        db.createConnection();
+        historyWord = db.select();
+        
     }
     
     
